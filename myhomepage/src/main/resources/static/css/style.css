@@ -1,0 +1,38 @@
+/* ページ全体 */
+body {
+  /* 背景色 */
+  background-color: #f5f5f5;
+  /* 文字の種類 */
+  font-family: sans-serif;
+  /* 外側の余白を消す */
+  margin: 0;
+
+}
+
+/* ヘッダー */
+header {
+  /* 背景色 */
+  background-color: #222;
+
+  /* 文字色 */
+  color: white;
+
+  /* 内側の余白 */
+  padding: 40px;
+
+  /* 中央寄せ */
+  text-align: center;
+}
+
+/* メイン */
+main {
+  padding: 30px;
+}
+
+/* section共通 */
+section {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}

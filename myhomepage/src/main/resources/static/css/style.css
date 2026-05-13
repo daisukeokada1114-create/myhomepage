@@ -1,38 +1,131 @@
 /* ページ全体 */
 body {
   /* 背景色 */
-  background-color: #f5f5f5;
+  background-color: #f4f2ed;
   /* 文字の種類 */
   font-family: sans-serif;
   /* 外側の余白を消す */
   margin: 0;
+  /* 基本文字色 */
+  color: #444;
 
 }
 
 /* ヘッダー */
 header {
   /* 背景色 */
-  background-color: #222;
+  background-color: #e9e7e1;
 
   /* 文字色 */
-  color: white;
+  color: #333;
 
   /* 内側の余白 */
-  padding: 40px;
+  padding: 56px 24px;
 
   /* 中央寄せ */
   text-align: center;
 }
 
+/* ヘッダー見出し */
+header h1 {
+  font-size: 36px;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+/* ヘッダー説明文 */
+header p {
+  font-size: 16px;
+  color: #666;
+}
+
 /* メイン */
 main {
-  padding: 30px;
+  padding: 40px 24px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 /* section共通 */
 section {
-  background-color: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 32px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* 予約ボタン */
+.reserve-button {
+  /* 文字色 */
+  color: white;
+  /* 背景色 */
+  background-color: #b8a27a;
+
+  /* 内側余白 */
+  padding: 12px 28px;
+  /* 下線削除 */
+  text-decoration: none;
+  /* 角丸 */
+  border-radius: 999px;
+  /* 横並び用 */
+  display: inline-block;
+  /* 文字を上品に */
+  font-weight: bold;
+  letter-spacing: 0.06em;
+}
+
+/* マウスを乗せたとき */
+.reserve-button:hover {
+  background-color: #9f895f;
+}
+
+/* レスポンシブ対応
+画面幅が、７６８以下のときに適用される */
+@media screen and (max-width: 768px) {
+
+  /* スマホでは全体の余白を小さくする */
+  main {
+    padding: 24px 16px;
+  }
+
+  /* ヘッダーの余白をスマホ向けに調整 */
+  header {
+    padding: 48px 16px;
+  }
+
+  /* スマホ用の見出しサイズ */
+  header h1 {
+    font-size: 28px;
+  }
+
+  /* sectionの余白をスマホ向けに調整 */
+  section {
+    padding: 24px 18px;
+  }
+
+  /* 画像が画面からはみ出ないようにする */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 見出しをスマホで読みやすいサイズにする */
+  h1 {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  /* ボタンをスマホで押しやすくする */
+  .reserve-button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
 }

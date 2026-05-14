@@ -11,6 +11,10 @@ body {
 
 }
 
+.notice-content {
+  white-space: pre-wrap;
+}
+
 /* ヘッダー */
 header {
   /* 背景色 */

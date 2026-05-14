@@ -21,12 +21,17 @@ public class Notice {
   private String content;
 
   // ID取得
+  public Long getId() {
+    return id;
+  }
+
+  // ID設定
   public void setId(Long id) {
     this.id = id;
   }
 
   // タイトル取得
-  public String getTItle() {
+  public String getTitle() {
     return title;
   }
 

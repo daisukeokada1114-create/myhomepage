@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset=" UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ一覧</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <h1>お知らせ登録</h1>
+
+  <form action="/notice/create" method="post">
+
+    <p>タイトル</p>
+    <input type="text" name="title">
+
+    <p>本文</p>
+    <textarea name="content"></textarea>
+
+    <br>
+    <button type="submit">登録</button>
+
+  </form>
+
+  <hr>
+
+  <h1>お知らせ一覧</h1>
+
+  <ul>
+    <li th:each="notice : ${noticeList}">
+      <strong th:text="${notice.title}">タイトル</strong>
+      <p class="notice-content" th:text="${notice.content}">
+        本文
+      </p>
+
+      <form action="/notice/delete" method="post">
+        <input type="hidden" name="id" th:value="${notice.id}">
+        <button type="submit">削除</button>
+      </form>
+
+    </li>
+  </ul>
+
+</body>
+
+</html>

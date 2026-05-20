@@ -50,4 +50,32 @@ public class NoticeController {
     return "redirect:/notice";
   }
 
+  // 編集画面を表示する
+  @GetMapping("/notice/edit")
+  public String edit(@RequestParam Long id, Model model) {
+
+    // idを使ってDBから1件取得する
+    Notice notice = noticeService.findById(id);
+
+    // edit.htmlに渡す
+    model.addAttribute("notice", notice);
+
+    // edit.htmlを表示する
+    return "edit";
+  }
+
+  // 編集内容を更新する
+  @PostMapping("/notice/update")
+  public String update(
+      @RequestParam Long id,
+      @RequestParam String title,
+      @RequestParam String content) {
+
+    // 入力された内容でDBを更新する
+    noticeService.update(id, title, content);
+
+    // 更新後はトップページへ戻る
+    return "redirect:/";
+  }
+
 }

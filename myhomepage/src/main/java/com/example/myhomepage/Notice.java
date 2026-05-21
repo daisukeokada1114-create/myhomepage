@@ -1,5 +1,7 @@
 package com.example.myhomepage;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,21 @@ public class Notice {
 
   // お知らせ本文
   private String content;
+
+  // 作成日時
+  // いつ作られたデータかを保存をする
+  // LocalDateTimeは日付＋時間を扱うクラス
+  private LocalDateTime createdAt;
+
+  // 作成日時取得
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  // 作成日時保存
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
   // ID取得
   public Long getId() {

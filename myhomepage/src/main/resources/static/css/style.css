@@ -84,6 +84,40 @@ section {
   background-color: #9f895f;
 }
 
+.notice-section {
+  margin-top: 60px;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notice-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.notice-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.notice-content {
+  margin-bottom: 10px;
+}
+
+.notice-date {
+  font-size: 14px;
+  color: gray;
+}
+
+
+
+
+
 /* レスポンシブ対応
 画面幅が、７６８以下のときに適用される */
 @media screen and (max-width: 768px) {

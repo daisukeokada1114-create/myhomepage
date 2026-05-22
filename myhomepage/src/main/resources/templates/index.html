@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -15,12 +15,12 @@
 
     <!-- javaから渡された店名 -->
     <h1 th:text="${salonName}">
-      店名
+      Java Spring Bootで作成した架空案件ホームページ
     </h1>
 
     <!-- javaから渡されたキャッチコピー -->
     <p th:text="${concept}">
-      サロンのコンセプトを記入
+      キャッチコピー
     </p>
 
     <a href="#" class="reserve-button">
@@ -33,16 +33,35 @@
 
 
     <!-- 店舗紹介 -->
-    <section>
+    <section class="notice-section">
 
-      <!-- concept -->
-      <h2>
-        Java Spring Bootで作成した架空案件ホームページ
-      </h2>
+      <!-- セクションタイトル -->
+      <h2>お知らせ</h2>
+      <!-- お知らせ一覧 -->
+      <div class="notice-list">
+        <!-- noticeList を一件ずつ表示 -->
+        <article th:each="notice : ${noticeList}" class="notice-card">
 
-      <p>
-        具体的にユーザーに伝えたいこと コンセプト
-      </p>
+          <!-- お知らせのタイトル -->
+          <h3 class="notice-title" th:text="${notice.title}">タイトル</h3>
+
+          <!-- お知らせの本文 -->
+          <p class="notice-content" th:text="${notice.content}">本文</p>
+
+          <!-- 作成日時 -->
+          <p class="notice-date">
+            作成日時：
+            <span th:text="${notice.createdAt}">
+              2026-05-22
+            </span>
+          </p>
+
+        </article>
+
+
+
+      </div>
+
 
       <h2>Menu</h2>
 

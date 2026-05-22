@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset=" UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お知らせ一覧</title>
 
@@ -36,6 +36,18 @@
       <strong th:text="${notice.title}">タイトル</strong>
       <p class="notice-content" th:text="${notice.content}">
         本文
+      </p>
+
+      <!-- 作成日時を表示 -->
+      <p>
+        作成日時：
+        <span th:text="${notice.createdAt}">2026-05-22T10:00</span>
+      </p>
+
+      <!-- 更新日時を表示 -->
+      <p>
+        更新日時：
+        <span th:text="${notice.updatedAt}">2026-05-22T10:00</span>
       </p>
 
       <form action="/notice/delete" method="post">

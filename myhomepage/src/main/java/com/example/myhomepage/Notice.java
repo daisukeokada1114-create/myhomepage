@@ -37,6 +37,19 @@ public class Notice {
     this.createdAt = createdAt;
   }
 
+  // 更新日時
+  private LocalDateTime updatedAt;
+
+  // 更新日時を取得
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  // 更新日時設定
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
   // ID取得
   public Long getId() {
     return id;

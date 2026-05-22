@@ -2,11 +2,10 @@ package com.example.myhomepage;
 
 // Listを使う為に必要
 // 複数のお知らせデータを扱うときに使う
+import java.time.LocalDateTime;
 import java.util.List;
 // このクラスをServiceとしてSpringに認識させる
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 // NoticeService
 // お知らせ機能の業務処理担当
@@ -44,22 +43,8 @@ public class NoticeService {
   // titleとcontentを受け取り、DBへ保存する
   public void create(String title, String content) {
 
-    // タイトル未入力チェック
-    // null
-    // 値そのものが存在しない
-    // isBlank()
-    // 空文字やスペースのみ
-    if (title == null || title.isBlank()) {
-      // エラー発生
-      // throw
-      // 強制的にエラーを発生させる
-      throw new IllegalArgumentException("タイトルを入力してください");
-    }
-
-    // 本文未入力チェック
-    if (content == null || content.isBlank()) {
-      throw new IllegalArgumentException("本文を入力してください");
-    }
+    // 登録前に入力チェックを行う
+    validateNotice(title, content);
 
     // Noticeオブジェクト作成
     // DBへ保存するための入れ物
@@ -69,13 +54,16 @@ public class NoticeService {
     // 本文設定
     notice.setContent(content);
 
-    // 現在日時保存
-    notice.setCreatedAt(LocalDateTime.now());
-    // DB保存
+    // 現在日時を一回だけ取得する
+    LocalDateTime now = LocalDateTime.now();
+    // 作成日時設定
+    notice.setCreatedAt(now);
+    // 更新日時設定
+    notice.setUpdatedAt(now);
+
     // save()
     // insert または update
     noticeRepository.save(notice);
-
   }
 
   // お知らせ一覧を取得
@@ -84,13 +72,6 @@ public class NoticeService {
     // Repositoryに用意した新しい順で取得するメソッドを呼び出す
     // ControllerはServiceを呼ぶだけにして、DB取得の細かい処理はServiceに集約する
     return noticeRepository.findAllByOrderByIdDesc();
-  }
-
-  // お知らせを保存
-  // 渡されたNoticeを保存
-  public void save(Notice notice) {
-    // DB保存
-    noticeRepository.save(notice);
   }
 
   // お知らせ削除
@@ -116,15 +97,11 @@ public class NoticeService {
   // idを使って既存データ取得
   public void update(Long id, String title, String content) {
 
-    // タイトルが空ならエラー
-    if (title == null || title.isBlank()) {
-      throw new IllegalArgumentException("タイトルを入力してください");
-    }
-    // 本文が空ならエラー
-    if (content == null || content.isBlank()) {
-      throw new IllegalArgumentException("本文を入力してください");
-    }
+    // 更新前に入力チェックを行う
+    validateNotice(title, content);
+
     // idを使って既存データ取得
+    // findById()はOptionalを返すため、データがなければ例外にする
     Notice notice = noticeRepository.findById(id).orElseThrow();
 
     // 新しい内容で上書き
@@ -132,8 +109,26 @@ public class NoticeService {
     notice.setTitle(title);
     notice.setContent(content);
 
+    // 更新日時を現在時刻に変更する
+    notice.setUpdatedAt(LocalDateTime.now());
+
     // DB更新
     // save()はidが存在している場合はupdateになる
     noticeRepository.save(notice);
+  }
+
+  // お知らせ内容の入力内容をチェックする共通処理
+  // create()とupdate()の両方から使う
+  private void validateNotice(String title, String content) {
+
+    // タイトルが空ならエラー
+    // isBlank()は空文字やスペースだけもはじける
+    if (title == null || title.isBlank()) {
+      throw new IllegalArgumentException("タイトルを入力してください");
+    }
+    // 本文が空ならエラー
+    if (content == null || content.isBlank()) {
+      throw new IllegalArgumentException("本文を入力してください");
+    }
   }
 }

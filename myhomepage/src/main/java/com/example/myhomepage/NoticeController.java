@@ -28,7 +28,7 @@ public class NoticeController {
   private final NoticeService noticeService;
 
   // コントラクタ
-  // springがNoticecontrollerをつくるときに
+  // springがNotice controllerをつくるときに
   // NoticeServiceを自動で渡してくれる
   // これをDIまたは依存性の注入という
   // new NoticeService()と、自分で書かなくても、springが必要な部品を自動で用意してくれる
@@ -45,7 +45,7 @@ public class NoticeController {
     // DBに保存されているお知らせ一覧を取得する
     // model.addAttributeでHTMLへ渡す
     // noticeListという名前でHTMLへ渡す
-    // Thymeleaf側では${noticeList} として使える
+    // Thyme leaf側では${noticeList} として使える
     model.addAttribute("noticeList", noticeService.findAll());
 
     // templates/notice.htmlを表示

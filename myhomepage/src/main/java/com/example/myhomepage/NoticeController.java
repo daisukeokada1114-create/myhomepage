@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 // フォームやＵＲＬから送られてきた値を受け取る為に使う
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 // お知らせ機能のcontrollerクラス
 // controllerの役割は、ブラウザから来たリクエストを受け取り、
 // 必要な処理をserviceに依頼し、
@@ -38,8 +40,20 @@ public class NoticeController {
 
   // noticeにアクセスされたときの処理
   @GetMapping("/notice")
-  public String notice(Model model) {
+  public String notice(Model model,
 
+      // ブラウザごとのログイン状態を取得する
+      HttpSession session) {
+
+    // Sessionからログイン情報を取得
+    User loginUser = (User) session.getAttribute("loginUser");
+
+    // ログインしていなければ
+    if (loginUser == null) {
+
+      // ログイン画面へ戻す
+      return "redirect:/login";
+    }
     // Serviceに依頼してDBからお知らせ一覧を取得する
     // noticeService.findAll()
     // DBに保存されているお知らせ一覧を取得する

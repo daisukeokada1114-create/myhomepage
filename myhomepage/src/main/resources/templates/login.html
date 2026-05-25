@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者ログイン</title>
+</head>
+
+<body>
+  <h1>管理者ログイン</h1>
+
+  <!-- 
+    ログイン情報を/login に POST 送信する
+    method="post" は、入力データをサーバーへ送るときに使う
+  -->
+  <form action="/login" method="post">
+
+    <p>ユーザー名</p>
+    <!-- name="username" が Controller側で受け取る名前になる -->
+    <input type="text" name="username">
+
+    <p>パスワード</p>
+    <!-- name="password" が Controller側で受け取る名前になる -->
+    <input type="password" name="password">
+
+    <br><br>
+
+    <button type="submit">ログイン</button>
+  </form>
+</body>
+
+</html>

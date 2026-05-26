@@ -58,4 +58,17 @@ public class LoginController {
 
   }
 
+  // ログアウト処理
+  // ログイン状態を保存しているSession を削除する
+  @GetMapping("/logout")
+  public String logout(HttpSession session) {
+
+    // 現在のブラウザに保存されている Session 情報をすべて破棄する
+    // これにより loginUser も削除され、未ログイン状態になる
+    session.invalidate();
+
+    // ログアウト後はログイン画面へ移動する
+    return "redirect:/login";
+  }
+
 }

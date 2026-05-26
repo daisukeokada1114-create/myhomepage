@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 // フォームやＵＲＬから送られてきた値を受け取る為に使う
 import org.springframework.web.bind.annotation.RequestParam;
-
-import jakarta.servlet.http.HttpSession;
+// PathVariable を使う為追加
+import org.springframework.web.bind.annotation.PathVariable;
 
 // お知らせ機能のcontrollerクラス
 // controllerの役割は、ブラウザから来たリクエストを受け取り、
@@ -40,20 +40,8 @@ public class NoticeController {
 
   // noticeにアクセスされたときの処理
   @GetMapping("/notice")
-  public String notice(Model model,
+  public String notice(Model model) {
 
-      // ブラウザごとのログイン状態を取得する
-      HttpSession session) {
-
-    // Sessionからログイン情報を取得
-    User loginUser = (User) session.getAttribute("loginUser");
-
-    // ログインしていなければ
-    if (loginUser == null) {
-
-      // ログイン画面へ戻す
-      return "redirect:/login";
-    }
     // Serviceに依頼してDBからお知らせ一覧を取得する
     // noticeService.findAll()
     // DBに保存されているお知らせ一覧を取得する
@@ -75,8 +63,10 @@ public class NoticeController {
       @RequestParam String title,
       // textarea name ="content"の値を受け取る
       @RequestParam String content,
+
       // HTMLへデータを渡す為に使う
       Model model) {
+
     try {
       // Serviceへ登録処理を依頼
       noticeService.create(title, content);
@@ -90,6 +80,8 @@ public class NoticeController {
       model.addAttribute("errorMessage", e.getMessage());
 
       // 入力したタイトルをもう一度HTMLへ渡す
+      model.addAttribute("title", title);
+      // 入力した本文をHTMLへ戻す
       model.addAttribute("content", content);
 
       // 一覧も再表示するため再取得
@@ -116,10 +108,10 @@ public class NoticeController {
 
   // 編集画面を表示する
   // URL例 notice/edit?id=1
-  @GetMapping("/notice/edit")
+  @GetMapping("/notice/edit/{id}")
   public String edit(
       // URLからidを受け取る
-      @RequestParam Long id,
+      @PathVariable Long id,
       Model model) {
 
     // idを使ってDBから1件取得する
@@ -142,6 +134,7 @@ public class NoticeController {
       @RequestParam String title,
       // 更新後本文
       @RequestParam String content,
+
       Model model) {
 
     try {
@@ -149,6 +142,7 @@ public class NoticeController {
       noticeService.update(id, title, content);
       // 更新後戻る
       return "redirect:/notice";
+
     } catch (IllegalArgumentException e) {
 
       // エラーメッセージをHTMLへ渡す

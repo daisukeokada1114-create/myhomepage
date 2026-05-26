@@ -12,6 +12,13 @@
 <body>
   <h1>お知らせ登録</h1>
 
+  <p>
+    ログイン中：
+    <span th:text="${loginUser.username}">admin</span>
+  </p>
+
+  <a href="/logout">ログアウト</a>
+
   <p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;"></p>
 
   <form action="/notice/create" method="post">

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 // PathVariable を使う為追加
 import org.springframework.web.bind.annotation.PathVariable;
 
+import jakarta.servlet.http.HttpSession;
+
 // お知らせ機能のcontrollerクラス
 // controllerの役割は、ブラウザから来たリクエストを受け取り、
 // 必要な処理をserviceに依頼し、
@@ -40,7 +42,13 @@ public class NoticeController {
 
   // noticeにアクセスされたときの処理
   @GetMapping("/notice")
-  public String notice(Model model) {
+  public String notice(HttpSession session, Model model) {
+
+    // セッションからログイン中のユーザー情報を取得する
+    User loginUser = (User) session.getAttribute("loginUser");
+
+    // HTML側で、${loginUser.username}として使えるようにわたす
+    model.addAttribute("loginUser", loginUser);
 
     // Serviceに依頼してDBからお知らせ一覧を取得する
     // noticeService.findAll()

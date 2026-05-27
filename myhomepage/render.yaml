@@ -3,6 +3,7 @@ services:
     name: myhomepage
     runtime: docker
     plan: free
-    dockerfilePath: myhomepage/Dockerfile
-    dockerContext: myhomepage
+    rootDir: myhomepage
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     autoDeploy: true

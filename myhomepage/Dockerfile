@@ -4,7 +4,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # プロジェクト全体コピー
-COPY . .
+COPY . /app
 
 # mvnwに実行権限付与
 RUN chmod +x mvnw
@@ -15,5 +15,5 @@ RUN ./mvnw clean package -DskipTests
 # jarを固定名へコピー
 RUN cp target/*.jar app.jar
 
-# Renderが渡すポートで起動
+# RenderのPORTで起動
 ENTRYPOINT ["sh","-c","java -Dserver.port=$PORT -jar app.jar"]

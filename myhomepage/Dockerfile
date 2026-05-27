@@ -1,22 +1,19 @@
 FROM eclipse-temurin:17-jdk
 
-# 作業フォルダ作成
+# 作業ディレクトリ
 WORKDIR /app
 
-# プロジェクトをコンテナへコピー
+# プロジェクト全体コピー
 COPY . .
 
-# Maven実行権限付与
+# mvnwに実行権限付与
 RUN chmod +x mvnw
 
 # Spring Bootビルド
 RUN ./mvnw clean package -DskipTests
 
-# 作成されたjarを app.jar にコピー
+# jarを固定名へコピー
 RUN cp target/*.jar app.jar
 
-# Renderが渡すPORTを使う
-ENV PORT=8080
-
-# アプリ起動
-CMD java -Dserver.port=$PORT -jar app.jar
+# Renderが渡すポートで起動
+ENTRYPOINT ["sh","-c","java -Dserver.port=$PORT -jar app.jar"]

@@ -2,6 +2,7 @@ package com.example.myhomepage;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class Contact {
 
   @NotBlank(message = "お問い合わせ内容を入力してください")
   @Size(max = 2000, message = "お問い合わせ内容は2000文字以内で入力してください")
+  @Column(length = 2000)
   private String message;
 
   private LocalDateTime createdAt;

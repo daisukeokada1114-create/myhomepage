@@ -6,7 +6,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // Spring MVCの設定を追加するクラス
 @Configuration
-
 public class WebConfig implements WebMvcConfigurer {
 
   private final LoginCheckInterceptor loginCheckInterceptor;
@@ -19,11 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
 
-    // どのURLにログインチェックをかけるか設定する
+    // 管理系URLをログイン必須にする
     registry.addInterceptor(loginCheckInterceptor)
-
-        // /notice 以下をログイン必須にする
-        .addPathPatterns("/notice", "/notice/**");
+        .addPathPatterns("/notice", "/notice/**", "/admin", "/admin/**");
   }
-
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ一覧</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <main>
+    <section class="contact-section">
+      <h1>お問い合わせ一覧</h1>
+
+      <p th:if="${#lists.isEmpty(contacts)}">お問い合わせはまだありません。</p>
+
+      <div th:unless="${#lists.isEmpty(contacts)}" style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>お問い合わせ内容</th>
+              <th>送信日時</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="contact : ${contacts}">
+              <td th:text="${contact.name}"></td>
+              <td th:text="${contact.email}"></td>
+              <td th:text="${contact.message}"></td>
+              <td th:text="${#temporals.format(contact.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><a th:href="@{/}">トップへ戻る</a></p>
+    </section>
+  </main>
+</body>
+</html>
